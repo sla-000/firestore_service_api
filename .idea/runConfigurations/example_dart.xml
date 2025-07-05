@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="example.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" nameIsGenerated="true">
+    <option name="envs">
+      <entry key="GOOGLE_APPLICATION_CREDENTIALS" value="secret/ella500-firebase-adminsdk-ywm10-9780588d00.json" />
+    </option>
+    <option name="filePath" value="$PROJECT_DIR$/example/lib/example.dart" />
+    <option name="workingDirectory" value="$PROJECT_DIR$/example" />
+    <method v="2" />
+  </configuration>
+</component>
