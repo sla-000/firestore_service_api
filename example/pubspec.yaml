@@ -1,0 +1,14 @@
+name: example
+description: A sample command-line application.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.4.4
+
+dependencies:
+  firestore_service_api:
+    path: ../
+
+dev_dependencies:
+  very_good_analysis: ^9.0.0

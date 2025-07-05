@@ -1,0 +1,19 @@
+name: firestore_service_api
+description: Work with Firestore database over https API with service account
+version: 1.0.0
+repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.4.4
+
+dependencies:
+  googleapis: ^14.0.0
+  googleapis_auth: ^2.0.0
+  logging: ^1.2.0
+  meta: ^1.10.0
+
+dev_dependencies:
+  melos: ^6.3.3
+  test: ^1.21.0
+  very_good_analysis: ^9.0.0
+
