@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:firestore_service_api/firestore_service_api.dart';
 
+/// Example of using the FirestoreService API.
 void main() async {
   final service = FirestoreService();
   await service.init(projectId: 'ella500'); // <<< your project name
@@ -15,12 +16,14 @@ void main() async {
   await service.repo.deleteDocument(documentPath: 'test/111111111');
 }
 
+/// Demonstrates getting a document using the low-level Firestore API.
 Future<void> _getDocLowLevel(FirestoreService service) async {
   final doc = await service.repo.firestore.get(service.repo.firestorePathUtils
       .absolutePathFromRelative('test/111111111'));
   stdout.writeln('doc2=${jsonEncode(_convertToJson(doc.fields!))}');
 }
 
+/// Demonstrates adding a document with various field types.
 Future<void> _addDoc(FirestoreService service) async {
   await service.repo.addDocument(
     collectionPath: 'test',
@@ -67,6 +70,7 @@ Future<void> _addDoc(FirestoreService service) async {
   );
 }
 
+/// Demonstrates getting a document using the FirestoreService repository.
 Future<void> _getDoc(FirestoreService service) async {
   final doc = await service.repo.getDocument(documentPath: 'test/111111111');
   stdout.writeln('doc=${jsonEncode(_convertToJson(doc.fields!))}');
@@ -128,6 +132,7 @@ Future<void> _getDoc(FirestoreService service) async {
   // }
 }
 
+/// Converts a Firestore document (Map<String, Value>) to a JSON-compatible map.
 Map<String, dynamic> _convertToJson(Map<String, Value> doc) {
   final json = <String, dynamic>{};
 
