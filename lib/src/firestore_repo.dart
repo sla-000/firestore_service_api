@@ -112,8 +112,8 @@ class FirestoreRepo {
   /// [collectionPath] is the path to the collection.
   Future<Document> addDocument({
     required String collectionPath,
-    required String id,
     required Map<String, Value> fields,
+    String? id,
   }) async {
     final documentParent = pathUtils.parent(collectionPath);
     final absoluteParent =
