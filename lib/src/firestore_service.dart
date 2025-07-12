@@ -4,8 +4,8 @@ import 'package:firestore_service_api/src/path_utils.dart';
 
 import 'firestore_repo.dart';
 
-class FirestoreServiceApi {
-  FirestoreServiceApi()
+class FirestoreService {
+  FirestoreService()
       : repo = FirestoreRepo(
           firestoreApiProvider: FirestoreApiProvider(),
           firestorePathUtils: FirestorePathUtils(),

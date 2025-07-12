@@ -17,9 +17,8 @@ class FirestoreRepo {
   @protected
   final FirestoreApiProvider firestoreApiProvider;
   @protected
-  final FirestorePathUtils firestorePathUtils;
-  @protected
   final PathUtils pathUtils;
+  final FirestorePathUtils firestorePathUtils;
 
   ProjectsDatabasesDocumentsResource get firestore =>
       firestoreApiProvider.api.projects.databases.documents;
