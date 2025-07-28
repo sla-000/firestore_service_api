@@ -86,8 +86,14 @@ scripts:
       dart run melos exec --concurrency=1 --\
         dart pub upgrade --major-versions
 
+  publish:dry:
+    description: "Publish to pub.dev"
+    run: |
+      dart run melos run --concurrency=1 --\
+        dart pub publish --force
+
   publish:
     description: "Publish to pub.dev"
     run: |
-      dart run melos exec --concurrency=1 --\
+      dart run melos run --concurrency=1 --\
         dart pub publish --force
