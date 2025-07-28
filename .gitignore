@@ -11,8 +11,7 @@ pubspec.lock
 
 build/
 
-.idea/**
-!.idea/runConfigurations/example_dart.xml
+.idea/
 
 .fvmrc
 
