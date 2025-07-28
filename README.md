@@ -35,6 +35,33 @@ A Dart package for interacting with Google Cloud Firestore using the REST API. T
 
 Add `firestore_service_api` to your `pubspec.yaml` file:
 
-2. **Use provided example as a starting point:**
+2. **Create a Firestore project:**
+
+For the package example I created a project with name `ella500` and use default database with default id `(default)`.
+You need to pass your project name and custom database id when you will start the example.
+
+2. **Create service account:**
+
+Download service account credentials for your Firestore project as a JSON file.
+
+Set environmental variable `GOOGLE_APPLICATION_CREDENTIALS` to the path of the credentials file.
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS=secret/ella500-firebase-adminsdk-ywm10-9780588d00.json
+```
+
+Then start the example.
+
+If you are not set up this properly you will most likely see an error like this:
+```
+Unhandled exception:
+ClientException with SocketException: Failed host lookup: 'metadata.google.internal' (OS Error: nodename nor servname provided, or not known, errno = 8), uri=http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/scopes
+#0      IOClient.send (package:http/src/io_client.dart:154:7)
+<asynchronous suspension>
+#1      BaseClient._sendUnstreamed (package:http/src/base_client.dart:93:32)
+<asynchronous suspension>
+#2      MetadataServerAuthorizationFlow._getScopes (package:googleapis_auth/src/oauth2_flows/metadata_server.dart:89:22)
+```
+
+3. **Use provided example as a starting point:**
 
 [Example](example/lib/example.dart)
