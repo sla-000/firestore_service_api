@@ -3,6 +3,10 @@ import 'dart:io';
 
 import 'package:firestore_service_api/firestore_service_api.dart';
 
+const kId = '111111111';
+const kPath = 'test/doc2';
+const kCollection = 'col2';
+
 /// Example of using the FirestoreService API.
 void main() async {
   final service = FirestoreService();
@@ -13,21 +17,40 @@ void main() async {
   await _getDoc(service);
   await _getDocLowLevel(service);
 
-  await service.repo.deleteDocument(documentPath: 'test/111111111');
+  await _getDocsLowLevel(service);
+
+  await service.repo.deleteDocument(documentPath: '$kPath/$kCollection/$kId');
+}
+
+Future<void> _getDocsLowLevel(FirestoreService service) async {
+  final docs = await service.repo.firestore.listDocuments(
+    service.repo.firestorePathUtils.absolutePathFromRelative(kPath),
+    kCollection,
+    orderBy: 'textField DESC',
+  );
+  stdout.writeln('-----------------');
+  stdout.writeln(
+    '_getDocsLowLevel: '
+    'docs=`${jsonEncode(docs.documents!.map((e) => e.fields).toList())}`',
+  );
 }
 
 /// Demonstrates getting a document using the low-level Firestore API.
 Future<void> _getDocLowLevel(FirestoreService service) async {
   final doc = await service.repo.firestore.get(service.repo.firestorePathUtils
-      .absolutePathFromRelative('test/111111111'));
-  stdout.writeln('doc2=${jsonEncode(_convertToJson(doc.fields!))}');
+      .absolutePathFromRelative('$kPath/$kCollection/$kId'));
+  stdout.writeln('-----------------');
+  stdout.writeln(
+    '_getDocLowLevel: '
+    'doc=`${jsonEncode(_convertToJson(doc.fields!))}`',
+  );
 }
 
 /// Demonstrates adding a document with various field types.
 Future<void> _addDoc(FirestoreService service) async {
-  await service.repo.addDocument(
-    collectionPath: 'test',
-    id: '111111111',
+  final doc = await service.repo.addDocument(
+    collectionPath: '$kPath/$kCollection',
+    id: kId,
     fields: {
       'textField': Value(stringValue: 'textField1'),
       'boolField': Value(booleanValue: true),
@@ -68,12 +91,22 @@ Future<void> _addDoc(FirestoreService service) async {
       ),
     },
   );
+  stdout.writeln('-----------------');
+  stdout.writeln(
+    '_addDoc: '
+    'doc=`${jsonEncode(_convertToJson(doc.fields!))}`',
+  );
 }
 
 /// Demonstrates getting a document using the FirestoreService repository.
 Future<void> _getDoc(FirestoreService service) async {
-  final doc = await service.repo.getDocument(documentPath: 'test/111111111');
-  stdout.writeln('doc=${jsonEncode(_convertToJson(doc.fields!))}');
+  final doc =
+      await service.repo.getDocument(documentPath: '$kPath/$kCollection/$kId');
+  stdout.writeln('-----------------');
+  stdout.writeln(
+    '_getDoc: '
+    'doc=`${jsonEncode(_convertToJson(doc.fields!))}`',
+  );
   // result:
   // {
   //   "geoPointField": {
