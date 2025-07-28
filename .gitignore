@@ -10,3 +10,5 @@ pubspec.lock
 .fvm/
 
 build/
+
+.idea/
