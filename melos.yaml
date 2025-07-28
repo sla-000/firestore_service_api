@@ -89,11 +89,11 @@ scripts:
   publish:dry:
     description: "Publish to pub.dev"
     run: |
-      dart run melos run --concurrency=1 --\
+      dart run melos run --\
         dart pub publish --force
 
   publish:
     description: "Publish to pub.dev"
     run: |
-      dart run melos run --concurrency=1 --\
+      dart run melos run --\
         dart pub publish --force
