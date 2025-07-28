@@ -6,7 +6,7 @@ import 'package:firestore_service_api/firestore_service_api.dart';
 const kDocumentId = '111111111';
 const kRootPath = 'test/doc2';
 const kCollection = 'col2';
-const kDocPath = '$kRootPath/$kCollection';
+const kCollectionPath = '$kRootPath/$kCollection';
 
 /// Example of using the FirestoreService API.
 void main() async {
@@ -31,7 +31,8 @@ void main() async {
   await _getDocsLowLevel(service);
 
   /// Delete a document.
-  await service.repo.deleteDocument(documentPath: '$kDocPath/$kDocumentId');
+  await service.repo
+      .deleteDocument(documentPath: '$kCollectionPath/$kDocumentId');
 }
 
 /// Demonstrates getting documents using the low-level Firestore API with orderBy.
@@ -51,7 +52,7 @@ Future<void> _getDocsLowLevel(FirestoreService service) async {
 /// Demonstrates getting a document using the low-level Firestore API.
 Future<void> _getDocLowLevel(FirestoreService service) async {
   final doc = await service.repo.firestore.get(service.repo.firestorePathUtils
-      .absolutePathFromRelative('$kDocPath/$kDocumentId'));
+      .absolutePathFromRelative('$kCollectionPath/$kDocumentId'));
   stdout.writeln('-----------------');
   stdout.writeln(
     '_getDocLowLevel: '
@@ -62,7 +63,7 @@ Future<void> _getDocLowLevel(FirestoreService service) async {
 /// Demonstrates adding a document with various field types.
 Future<void> _addDoc(FirestoreService service) async {
   final doc = await service.repo.addDocument(
-    collectionPath: '$kDocPath',
+    collectionPath: '$kCollectionPath',
     id: kDocumentId,
     fields: {
       'textField': Value(stringValue: 'textField1'),
@@ -113,8 +114,8 @@ Future<void> _addDoc(FirestoreService service) async {
 
 /// Demonstrates getting a document using the FirestoreService repository.
 Future<void> _getDoc(FirestoreService service) async {
-  final doc =
-      await service.repo.getDocument(documentPath: '$kDocPath/$kDocumentId');
+  final doc = await service.repo
+      .getDocument(documentPath: '$kCollectionPath/$kDocumentId');
   stdout.writeln('-----------------');
   stdout.writeln(
     '_getDoc: '
