@@ -9,19 +9,31 @@ const kCollection = 'col2';
 
 /// Example of using the FirestoreService API.
 void main() async {
+  /// Create a FirestoreService instance.
   final service = FirestoreService();
-  await service.init(projectId: 'ella500'); // <<< your project name
 
+  /// Initialize the FirestoreService instance.
+  await service.init(
+    projectId: 'ella500', // <<< your project name, and optional databaseId
+  );
+
+  /// Add a document with various field types.
   await _addDoc(service);
 
+  /// Get a document using the FirestoreService repository.
   await _getDoc(service);
+
+  /// Get a document using the low-level Firestore API.
   await _getDocLowLevel(service);
 
+  /// Get documents using the low-level Firestore API.
   await _getDocsLowLevel(service);
 
+  /// Delete a document.
   await service.repo.deleteDocument(documentPath: '$kPath/$kCollection/$kId');
 }
 
+/// Demonstrates getting documents using the low-level Firestore API with orderBy.
 Future<void> _getDocsLowLevel(FirestoreService service) async {
   final docs = await service.repo.firestore.listDocuments(
     service.repo.firestorePathUtils.absolutePathFromRelative(kPath),
@@ -166,6 +178,7 @@ Future<void> _getDoc(FirestoreService service) async {
 }
 
 /// Converts a Firestore document (Map<String, Value>) to a JSON-compatible map.
+/// Just for printing to stdout.
 Map<String, dynamic> _convertToJson(Map<String, Value> doc) {
   final json = <String, dynamic>{};
 
