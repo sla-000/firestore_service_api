@@ -3,9 +3,10 @@ import 'dart:io';
 
 import 'package:firestore_service_api/firestore_service_api.dart';
 
-const kId = '111111111';
-const kPath = 'test/doc2';
+const kDocumentId = '111111111';
+const kRootPath = 'test/doc2';
 const kCollection = 'col2';
+const kDocPath = '$kRootPath/$kCollection';
 
 /// Example of using the FirestoreService API.
 void main() async {
@@ -30,13 +31,13 @@ void main() async {
   await _getDocsLowLevel(service);
 
   /// Delete a document.
-  await service.repo.deleteDocument(documentPath: '$kPath/$kCollection/$kId');
+  await service.repo.deleteDocument(documentPath: '$kDocPath/$kDocumentId');
 }
 
 /// Demonstrates getting documents using the low-level Firestore API with orderBy.
 Future<void> _getDocsLowLevel(FirestoreService service) async {
   final docs = await service.repo.firestore.listDocuments(
-    service.repo.firestorePathUtils.absolutePathFromRelative(kPath),
+    service.repo.firestorePathUtils.absolutePathFromRelative(kRootPath),
     kCollection,
     orderBy: 'textField DESC',
   );
@@ -50,7 +51,7 @@ Future<void> _getDocsLowLevel(FirestoreService service) async {
 /// Demonstrates getting a document using the low-level Firestore API.
 Future<void> _getDocLowLevel(FirestoreService service) async {
   final doc = await service.repo.firestore.get(service.repo.firestorePathUtils
-      .absolutePathFromRelative('$kPath/$kCollection/$kId'));
+      .absolutePathFromRelative('$kDocPath/$kDocumentId'));
   stdout.writeln('-----------------');
   stdout.writeln(
     '_getDocLowLevel: '
@@ -61,8 +62,8 @@ Future<void> _getDocLowLevel(FirestoreService service) async {
 /// Demonstrates adding a document with various field types.
 Future<void> _addDoc(FirestoreService service) async {
   final doc = await service.repo.addDocument(
-    collectionPath: '$kPath/$kCollection',
-    id: kId,
+    collectionPath: '$kDocPath',
+    id: kDocumentId,
     fields: {
       'textField': Value(stringValue: 'textField1'),
       'boolField': Value(booleanValue: true),
@@ -113,7 +114,7 @@ Future<void> _addDoc(FirestoreService service) async {
 /// Demonstrates getting a document using the FirestoreService repository.
 Future<void> _getDoc(FirestoreService service) async {
   final doc =
-      await service.repo.getDocument(documentPath: '$kPath/$kCollection/$kId');
+      await service.repo.getDocument(documentPath: '$kDocPath/$kDocumentId');
   stdout.writeln('-----------------');
   stdout.writeln(
     '_getDoc: '
