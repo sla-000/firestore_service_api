@@ -63,7 +63,7 @@ Future<void> _getDocLowLevel(FirestoreService service) async {
 /// Demonstrates adding a document with various field types.
 Future<void> _addDoc(FirestoreService service) async {
   final doc = await service.repo.addDocument(
-    collectionPath: '$kCollectionPath',
+    collectionPath: kCollectionPath,
     id: kDocumentId,
     fields: {
       'textField': Value(stringValue: 'textField1'),
