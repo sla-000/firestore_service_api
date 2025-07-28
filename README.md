@@ -48,8 +48,22 @@ Set environmental variable `GOOGLE_APPLICATION_CREDENTIALS` to the path of the c
 ```bash
 export GOOGLE_APPLICATION_CREDENTIALS=secret/ella500-firebase-adminsdk-ywm10-9780588d00.json
 ```
+Don't forget to change the env variable to your credentials file name.
 
-Then start the example.
+4. **Use the provided example as a starting point:**
+
+[Example](example/lib/example.dart)
+
+5. **Start the example:**
+
+If you are using Android Studio there is a "example.dart" run configuration with the default env setup.
+Duplicate and modify it according to your settings.
+
+If you are a VSC user type in the terminal at the package's root directory:
+```bash
+env GOOGLE_APPLICATION_CREDENTIALS=example/secret/ella500-firebase-adminsdk-ywm10-9780588d00.json \
+dart run example/lib/example.dart
+```
 
 If you are not set up this properly you will most likely see an error like this:
 ```
@@ -61,17 +75,3 @@ ClientException with SocketException: Failed host lookup: 'metadata.google.inter
 <asynchronous suspension>
 #2      MetadataServerAuthorizationFlow._getScopes (package:googleapis_auth/src/oauth2_flows/metadata_server.dart:89:22)
 ```
-
-4. **Use provided example as a starting point:**
-
-[Example](example/lib/example.dart)
-
-If you are using Android Studio there is a "example.dart" run configuration with the default env setup.
-Duplicate and modify it according to your settings.
-
-If you are a VSC user type in the terminal at the package's root directory:
-```bash
-env GOOGLE_APPLICATION_CREDENTIALS=example/secret/ella500-firebase-adminsdk-ywm10-9780588d00.json \
-dart run example/lib/example.dart
-```
-Don't forget to change the env variable to your credentials file name.
